@@ -2,7 +2,7 @@
 
 Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. It displays a configurable silo capacity graphic with fill levels, foreground image overlay, optional background image and colorized thresholds.
 
-<img src="./widget/assets/img-preview.png" />
+<img src="https://user-images.githubusercontent.com/99970126/205926427-ae526cd8-c944-40d2-8d09-5248bc3c063e.png" />
 
 ### Please note that this plugin is in currently under BETA mode.
 
