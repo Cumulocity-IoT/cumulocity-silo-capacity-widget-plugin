@@ -1,4 +1,4 @@
-# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.0-beta/cumulocity-silo-capacity-widget-plugin-1.0.0-beta.zip)
+# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.0-beta/silo-capacity-widget-1.0.0-beta.zip)
 
 Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. It displays a configurable silo capacity graphic with fill levels, foreground image overlay, optional background image and colorized thresholds.
 
@@ -183,7 +183,7 @@ The widget configuration page contains a number of configuration attributes.
     - Drag using the left mouse button **and the Ctrl key** : When the Ctrl key is pressed during the mouse drag, this automatically updates the foreground and background left margin and top margin. To save the position changes, edit the widget and click the save button.
 ### Runtime Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.0-beta/cumulocity-silo-capacity-widget-plugin-1.0.0-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.0-beta/silo-capacity-widget-1.0.0-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
 
 ### Local Development?
 
