@@ -35,13 +35,13 @@ export class ColorPickerComponent {
   public hue: string;
   public color: string;
   public colorType: any = "hexa";
-  
-  constructor(private eRef: ElementRef) {}
+
+  constructor(private eRef: ElementRef) { }
 
   closeColorPicker(): void {
     this.colorPickerClosed.emit(true);
   }
-  
+
   applyColorClicked(): void {
     if (this.color !== undefined) {
       if (this.colorType === 'hexa') {
@@ -61,8 +61,8 @@ export class ColorPickerComponent {
 
     let r = (+rgba[0]).toString(16);
     let g = (+rgba[1]).toString(16);
-    let  b = (+rgba[2]).toString(16);
-    let  a = Math.round(+rgba[3] * 255).toString(16);
+    let b = (+rgba[2]).toString(16);
+    let a = Math.round(+rgba[3] * 255).toString(16);
 
     if (r.length === 1) { r = '0' + r; }
     if (g.length === 1) { g = '0' + g; }
@@ -72,7 +72,7 @@ export class ColorPickerComponent {
     return '#' + r + g + b + a;
   }
 
-  
+
 
   /*@HostListener('document:click', ['$event'])
   onClick(event) {

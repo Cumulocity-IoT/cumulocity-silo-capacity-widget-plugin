@@ -19,8 +19,8 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-/*   imports: [CommonModule, MatRadioModule],
-  declarations: [ColorPickerComponent, ColorSliderComponent, ColorPaletteComponent],
-  exports: [ColorPickerComponent], */
+  /*   imports: [CommonModule, MatRadioModule],
+    declarations: [ColorPickerComponent, ColorSliderComponent, ColorPaletteComponent],
+    exports: [ColorPickerComponent], */
 })
-export class ColorPickerModule {}
+export class ColorPickerModule { }

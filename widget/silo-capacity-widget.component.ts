@@ -27,7 +27,7 @@ import { BehaviorSubject } from "rxjs";
   styleUrls: ['./silo-capacity-widget.component.css']
 })
 export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoCheck {
-  
+
   @Input() public config: WidgetConfig;
 
   private realtimeMeasurement$;
@@ -35,8 +35,8 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   public currentFillPercentage = 0;
   public currentFillLevel = 100;
 
-  public cylinderStyle = new BehaviorSubject<{tiltHeight: string, width: string, height: string, borderRadius: string, fillContainerTopMargin: string, fillContainerLeftMargin: string, backgroundColor: string}>({tiltHeight: '20px', width: '100px', height: '300px', borderRadius: '100px/20px', fillContainerTopMargin: '5px', fillContainerLeftMargin: '5px', backgroundColor: 'rgba(160, 160, 160, 1.0)'});
-  public fillStyle = new BehaviorSubject<{tiltHeight: string, bottom: string, height: string, 'backgroundColor': string, borderRadius: string, top: string}>({tiltHeight: '20px', bottom: '0', height: '0', backgroundColor: 'rgba(245, 222, 179, 1)', borderRadius: '100px/20px', 'top': '0px'});
+  public cylinderStyle = new BehaviorSubject<{ tiltHeight: string, width: string, height: string, borderRadius: string, fillContainerTopMargin: string, fillContainerLeftMargin: string, backgroundColor: string }>({ tiltHeight: '20px', width: '100px', height: '300px', borderRadius: '100px/20px', fillContainerTopMargin: '5px', fillContainerLeftMargin: '5px', backgroundColor: 'rgba(160, 160, 160, 1.0)' });
+  public fillStyle = new BehaviorSubject<{ tiltHeight: string, bottom: string, height: string, 'backgroundColor': string, borderRadius: string, top: string }>({ tiltHeight: '20px', bottom: '0', height: '0', backgroundColor: 'rgba(245, 222, 179, 1)', borderRadius: '100px/20px', 'top': '0px' });
 
   private foregroundImagePlaceHolder: ElementRef;
   private backgroundImagePlaceHolder: ElementRef;
@@ -61,28 +61,28 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   public calculatedForegroundImageHeight = 0;
   public calculatedBackgroundImageHeight = 0;
 
-  public measurementContainerStyle = new BehaviorSubject<{height: string, 'margin-top': string}>({height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px'});
-  public imagesContainerStyle = new BehaviorSubject<{'margin-top': string}>({'margin-top': this.imagesContainerMarginTop + 'px'});
+  public measurementContainerStyle = new BehaviorSubject<{ height: string, 'margin-top': string }>({ height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px' });
+  public imagesContainerStyle = new BehaviorSubject<{ 'margin-top': string }>({ 'margin-top': this.imagesContainerMarginTop + 'px' });
 
   // This ViewChild is only used when in debug mode to allow the user to move the foreground and backgrounds image around
-  @ViewChild('foregroundImagePlaceHolder', {read: ElementRef, static: false}) set foregroundImage(foregroundImage: ElementRef) {
+  @ViewChild('foregroundImagePlaceHolder', { read: ElementRef, static: false }) set foregroundImage(foregroundImage: ElementRef) {
     if (foregroundImage) {
       this.foregroundImagePlaceHolder = foregroundImage;
 
-      this.foregroundImagePlaceHolder.nativeElement.ondragstart = function() {
+      this.foregroundImagePlaceHolder.nativeElement.ondragstart = function () {
         return false;
       };
 
       let mouseDown = false;
 
-      this.foregroundImagePlaceHolder.nativeElement.onmousedown = ( (event) => {
+      this.foregroundImagePlaceHolder.nativeElement.onmousedown = ((event) => {
         if (this.config.debugMode) {
           // If the control key is held down, we will store the config left and top positions on mouseup - the user can then 'edit' and save the widget to make these changes permanent
           this.ctrlKeyPressed = !!event.ctrlKey;
           mouseDown = true;
 
-          this.currentForegroundMarginLeft = Number(this.foregroundImagePlaceHolder.nativeElement.style.marginLeft.replace('px',''));
-          this.currentForegroundMarginTop = Number(this.foregroundImagePlaceHolder.nativeElement.style.marginTop.replace('px',''));
+          this.currentForegroundMarginLeft = Number(this.foregroundImagePlaceHolder.nativeElement.style.marginLeft.replace('px', ''));
+          this.currentForegroundMarginTop = Number(this.foregroundImagePlaceHolder.nativeElement.style.marginTop.replace('px', ''));
           if (this.backgroundImagePlaceHolder) {
             this.currentBackgroundLeft = Number(this.backgroundImagePlaceHolder.nativeElement.offsetLeft);
             this.currentBackgroundTop = Number(this.backgroundImagePlaceHolder.nativeElement.offsetTop);
@@ -91,12 +91,12 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
         }
       });
 
-      this.foregroundImagePlaceHolder.nativeElement.onmouseleave = ( () => {
+      this.foregroundImagePlaceHolder.nativeElement.onmouseleave = (() => {
         mouseDown = false;
         this.saveForegroundAndBackgroundImageLocations();
       });
 
-      this.foregroundImagePlaceHolder.nativeElement.onmouseup = ( () => {
+      this.foregroundImagePlaceHolder.nativeElement.onmouseup = (() => {
         if (mouseDown) {
           mouseDown = false;
           this.saveForegroundAndBackgroundImageLocations();
@@ -133,7 +133,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
     }
   }
 
-  @ViewChild('backgroundImagePlaceHolder', {read: ElementRef, static: false}) set backgroundImage(backgroundImage: ElementRef) {
+  @ViewChild('backgroundImagePlaceHolder', { read: ElementRef, static: false }) set backgroundImage(backgroundImage: ElementRef) {
     if (backgroundImage) {
       this.backgroundImagePlaceHolder = backgroundImage;
     }
@@ -149,29 +149,29 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
 
     // set the initial state
     this.setWidgetInitialState()
-        .then( () => {
-            // Only subscribe to realtime measurements if we're not in debugMode
-            if (!this.config.debugMode) {
-              // Subscribe to real-time measurements
-              this.realtimeMeasurement$ = this.realtime.subscribe(`/measurements/${this.config.device.id}`, realtimeData => {
-                const measurementFragmentAndSeries = this.config.measurementSeries.split('.');
-                if (_.has(realtimeData.data.data, `${measurementFragmentAndSeries[0]}.${measurementFragmentAndSeries[1]}`)) {
-                  // console.log('Received realtime measurement: ', JSON.stringify(realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]]));
-                  const measurementValue = realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]].value;
+      .then(() => {
+        // Only subscribe to realtime measurements if we're not in debugMode
+        if (!this.config.debugMode) {
+          // Subscribe to real-time measurements
+          this.realtimeMeasurement$ = this.realtime.subscribe(`/measurements/${this.config.device.id}`, realtimeData => {
+            const measurementFragmentAndSeries = this.config.measurementSeries.split('.');
+            if (_.has(realtimeData.data.data, `${measurementFragmentAndSeries[0]}.${measurementFragmentAndSeries[1]}`)) {
+              // console.log('Received realtime measurement: ', JSON.stringify(realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]]));
+              const measurementValue = realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]].value;
 
-                  if (this.config.measurementIsAPercentOrValue === 'measurementIsAPercent') {
-                    this.setCurrentFillPercentage(measurementValue);
-                  } else {
-                    this.setCurrentValue(measurementValue);
-                  }
-                }
-              });
+              if (this.config.measurementIsAPercentOrValue === 'measurementIsAPercent') {
+                this.setCurrentFillPercentage(measurementValue);
+              } else {
+                this.setCurrentValue(measurementValue);
+              }
             }
-        })
-        .catch(error => {
-          console.error(`'Cylinder Fill Widget': ${error}`);
-          alert(`'Cylinder Fill Widget': ${error}`);
-    });
+          });
+        }
+      })
+      .catch(error => {
+        console.error(`'Cylinder Fill Widget': ${error}`);
+        alert(`'Cylinder Fill Widget': ${error}`);
+      });
   }
 
   public ngAfterViewInit() {
@@ -179,16 +179,16 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
     // Check to see if the widget title is visible
     const c8yDashboardChildTitle = this.cdkDropListContainer.querySelector('c8y-dashboard-child-title');
     const widgetTitleDisplayValue: string = window.getComputedStyle(c8yDashboardChildTitle).getPropertyValue('display');
-    if(widgetTitleDisplayValue !== undefined && widgetTitleDisplayValue !== null && widgetTitleDisplayValue === 'none') {
+    if (widgetTitleDisplayValue !== undefined && widgetTitleDisplayValue !== null && widgetTitleDisplayValue === 'none') {
       this.measurementContainerMarginTop = 20;
       this.imagesContainerMarginTop = 20;
-      this.measurementContainerStyle.next({height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px'});
-      this.imagesContainerStyle.next({'margin-top': this.imagesContainerMarginTop + 'px'});
+      this.measurementContainerStyle.next({ height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px' });
+      this.imagesContainerStyle.next({ 'margin-top': this.imagesContainerMarginTop + 'px' });
     } else {
       this.measurementContainerMarginTop = 0;
       this.imagesContainerMarginTop = 0;
-      this.measurementContainerStyle.next({height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px'});
-      this.imagesContainerStyle.next({'margin-top': this.imagesContainerMarginTop + 'px'});
+      this.measurementContainerStyle.next({ height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px' });
+      this.imagesContainerStyle.next({ 'margin-top': this.imagesContainerMarginTop + 'px' });
     }
   }
 
@@ -197,7 +197,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
       this.cdkDropListContainerHeight = this.cdkDropListContainer.offsetHeight;
       this.measurementContainerHeight = this.cdkDropListContainerHeight / 1.545;
       if (this.measurementContainerHeight + 'px' != this.measurementContainerStyle.getValue().height) {
-        this.measurementContainerStyle.next({height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px'});
+        this.measurementContainerStyle.next({ height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px' });
       }
 
     }
@@ -222,7 +222,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   }
 
   private async setWidgetInitialState() {
-    return new Promise<void>( async (resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
       if (this.config.measurementSeries !== undefined) {
 
         // Set the defaults if the information wasn't entered in the widget configuration screen
@@ -372,7 +372,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
             };
 
             // Get the latest historical measurement for this {measurementFragment.measurementSeries}
-            const {data} = await this.measurementService.list(filter);
+            const { data } = await this.measurementService.list(filter);
 
             if (data.length > 0) {
               const measurementObject = data[0];
@@ -400,7 +400,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
 
   private getCylinderFillColor(): string {
     let cylinderFillColour = '';
-    if(this.config.enableThresholds) {
+    if (this.config.enableThresholds) {
       cylinderFillColour = this.getThresholdColor();
     }
     if (cylinderFillColour === '') {
@@ -411,7 +411,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
 
   ngOnDestroy(): void {
     // Unsubscribe from realtime measurement subscriptions
-    if( this.realtimeMeasurement$ !== undefined ) {
+    if (this.realtimeMeasurement$ !== undefined) {
       this.realtime.unsubscribe(this.realtimeMeasurement$);
     }
   }
@@ -505,7 +505,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
       thresholdColor = 'green'
     }
 
-    return {'color': `${thresholdColor}`};
+    return { 'color': `${thresholdColor}` };
   }
 
   private getThresholdColor(): string {

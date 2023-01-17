@@ -14,7 +14,7 @@
     padding-bottom: 10px;
 }
 
-.show-image-container input,.show-debug-container input {
+.show-image-container input, .show-debug-container input {
     margin-top: 3px;
 }
 
@@ -55,10 +55,10 @@
 }
 
 .help-icon {
-    margin-left:5px;
+    margin-left: 5px;
 }
 
-.help-icon > img {
+.help-icon>img {
     max-width: 20px;
     max-height: 20px;
 }

@@ -15,8 +15,8 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
-import {CoreModule, HOOK_COMPONENTS} from "@c8y/ngx-components";
-import {NgModule} from "@angular/core";
+import { CoreModule, HOOK_COMPONENTS } from "@c8y/ngx-components";
+import { NgModule } from "@angular/core";
 import { ColorPickerComponent } from "./color-picker/color-picker-component";
 import { ColorPaletteComponent } from "./color-picker/color-palette/color-palette-component";
 import { ColorSliderComponent } from "./color-picker/color-slider/color-slider-component";
@@ -43,9 +43,19 @@ import * as preview from './preview-image';
                 description: 'Displays silo capacity fill levels, foreground image, background image and thresholds',
                 component: SiloCapacityWidget,
                 configComponent: SiloCapacityWidgetConfig,
-                previewImage: preview.previewImage
+                previewImage: preview.previewImage,
+                data: {
+                    ng1: {
+                        options: {
+                            noDeviceTarget: false,
+                            noNewWidgets: false,
+                            deviceTargetNotRequired: false,
+                            groupsSelectable: true
+                        }
+                    }
+                }
             }
         }
     ],
 })
-export class SiloCapacityWidgetModule {}
+export class SiloCapacityWidgetModule { }
