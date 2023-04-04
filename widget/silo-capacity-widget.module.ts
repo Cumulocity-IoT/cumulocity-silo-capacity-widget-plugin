@@ -40,7 +40,7 @@ import * as preview from './preview-image';
             useValue: {
                 id: 'global.presales.silo.capacity.widget',
                 label: 'Silo Capacity',
-                description: 'Displays silo capacity fill levels, foreground image, background image and thresholds',
+                description: 'The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds.',
                 component: SiloCapacityWidget,
                 configComponent: SiloCapacityWidgetConfig,
                 previewImage: preview.previewImage,

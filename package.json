@@ -1,16 +1,18 @@
 {
   "name": "cumulocity-silo-capacity-widget-plugin",
-  "version": "1.0.1-beta",
+  "version": "1.0.1",
   "description": "The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds.",
   "scripts": {
     "start": "c8ycli server",
-    "build": "c8ycli build",
+    "build": "c8ycli build --env.mode=production",
     "deploy": "c8ycli deploy",
     "postinstall": "ngcc",
     "prebuild": " gulp clean",
     "postbuild": " gulp bundle"
   },
-  "keywords": [],
+  "keywords": ["Cumulocity",
+  "Plugin",
+  "Widget"],
   "author": "Software AG, Global Presales",
   "license": "Apache 2.0",
   "dependencies": {
@@ -52,10 +54,10 @@
   },
   "c8y": {
     "application": {
-      "name": "Cumulocity Silo Capacity Widget Plugin",
+      "name": "Silo Capacity Widget",
       "description": "The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds.",
-      "contextPath": "silo-capacity-widget",
-      "key": "silo-capacity-widget-application-key",
+      "contextPath": "sag-ps-pkg-silo-capacity",
+      "key": "sag-ps-pkg-silo-capacity-application-key",
       "globalTitle": "The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds.",
       "tabsHorizontal": true,
       "isPackage": true,
@@ -67,7 +69,7 @@
       },
       "exports": [
         {
-          "name": "Cumulocity Silo Capacity Widget Plugin",
+          "name": "Silo Capacity Widget",
           "module": "SiloCapacityWidgetModule",
           "path": "./widget/silo-capacity-widget.module.ts",
           "description": "The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds."

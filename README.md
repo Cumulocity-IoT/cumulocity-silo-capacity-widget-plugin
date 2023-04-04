@@ -1,4 +1,4 @@
-# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.1-beta/silo-capacity-widget-1.0.1-beta.zip)
+# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.1/sag-ps-pkg-silo-capacity-1.0.1.zip)
 
 Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. It displays a configurable silo capacity graphic with fill levels, foreground image overlay, optional background image and colorized thresholds.
 
@@ -10,13 +10,11 @@ Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin creat
 
 ![previewImage4](https://user-images.githubusercontent.com/99970126/205926774-0739c072-2f04-43e8-aa69-9d3c7651089b.png)
 
-### Please note that this plugin is in currently under BETA mode.
-
 ### Please choose Silo Capacity Widget release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | SILO CAPACITY WIDGET PLUGIN  |
 |--------------------|------------|------------------------------|
-| 2.x.x(coming soon) | >= 1016.x.x| 1.x.x                        |
+| 2.0.x              | >= 1016.x.x| 1.x.x                        |
 
 ## Features
 **Configurable cylinder:** Set the height, width, color and location of the cylinder in your widget
@@ -33,7 +31,7 @@ Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin creat
 ## Installation
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.1-beta/silo-capacity-widget-1.0.1-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.0.1/sag-ps-pkg-silo-capacity-1.0.1.zip) and install via Administrations --> Ecosystems --> Applications --> Packages 
 
 ## QuickStart
 
