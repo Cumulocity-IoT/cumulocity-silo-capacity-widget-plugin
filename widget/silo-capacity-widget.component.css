@@ -144,3 +144,18 @@ input {
 .threshold-normal {
     color: green;
 }
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-item-left {
+    padding-left: 16px;
+    flex: 50%;
+}
+
+.flex-item-right {
+    padding-left: 10px;
+    flex: 50%;
+}
