@@ -10,9 +10,11 @@
     "prebuild": " gulp clean",
     "postbuild": " gulp bundle"
   },
-  "keywords": ["Cumulocity",
-  "Plugin",
-  "Widget"],
+  "keywords": [
+    "Cumulocity",
+    "Plugin",
+    "Widget"
+  ],
   "author": "Software AG, Global Presales",
   "license": "Apache 2.0",
   "dependencies": {
@@ -79,8 +81,27 @@
         "widget-plugin": [
           "SiloCapacityWidgetModule"
         ]
+      },
+    "copy": [
+      {
+        "from": "images/batterycapacity.png",
+        "to": "images/batterycapacity.png"
+      },
+      {
+        "from": "images/currentfill.png",
+        "to": "images/currentfill.png"
+      },
+      {
+        "from": "images/oilstorage.png",
+        "to": "images/oilstorage.png"
+      },
+      {
+        "from": "LICENSE",
+        "to": "LICENSE.txt"
       }
-    },
+
+    ]
+  },
     "cli": {}
   },
   "browserslist": [
