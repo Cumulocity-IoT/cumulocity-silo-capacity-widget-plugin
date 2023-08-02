@@ -11,7 +11,7 @@ Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin creat
 
 ### Please choose Silo Capacity Widget release based on Cumulocity/Application builder version:
 
-|APPLICATION BUILDER | CUMULOCITY | SILO CAPACITY WIDGET PLUGIN  |
+|APPLICATION BUILDER&nbsp;|&nbsp;CUMULOCITY&nbsp;|&nbsp;SILO CAPACITY WIDGET PLUGIN&nbsp;|
 |--------------------|------------|------------------------------|
 | 2.0.x              | >= 1016.x.x| 1.x.x                        |
 
