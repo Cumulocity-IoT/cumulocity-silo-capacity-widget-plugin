@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-silo-capacity-widget-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The Silo Capacity Widget displays a configurable silo capacity graphic with fill levels, foreground image, background image and thresholds.",
   "scripts": {
     "start": "c8ycli server",
