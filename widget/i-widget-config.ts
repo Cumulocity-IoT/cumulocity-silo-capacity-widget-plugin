@@ -63,4 +63,5 @@ export interface WidgetConfig {
     thresholdMediumColor: string;
 
     debugMode: boolean;
+    datapoints?:any;
 }

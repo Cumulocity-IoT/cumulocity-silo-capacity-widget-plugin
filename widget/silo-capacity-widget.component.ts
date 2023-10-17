@@ -146,7 +146,6 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   }
 
   public ngOnInit(): void {
-
     // set the initial state
     this.setWidgetInitialState()
       .then(() => {
@@ -154,7 +153,8 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
         if (!this.config.debugMode) {
           // Subscribe to real-time measurements
           this.realtimeMeasurement$ = this.realtime.subscribe(`/measurements/${this.config.device.id}`, realtimeData => {
-            const measurementFragmentAndSeries = this.config.measurementSeries.split('.');
+            const dataPointsObj = this.config.datapoints.find( dp => dp.__active == true);
+            const measurementFragmentAndSeries=[dataPointsObj.fragment,dataPointsObj.series];
             if (_.has(realtimeData.data.data, `${measurementFragmentAndSeries[0]}.${measurementFragmentAndSeries[1]}`)) {
               // console.log('Received realtime measurement: ', JSON.stringify(realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]]));
               const measurementValue = realtimeData.data.data[measurementFragmentAndSeries[0]][measurementFragmentAndSeries[1]].value;
@@ -223,7 +223,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
 
   private async setWidgetInitialState() {
     return new Promise<void>(async (resolve, reject) => {
-      if (this.config.measurementSeries !== undefined) {
+      if(this.config.datapoints && this.config.datapoints.length > 0){
 
         // Set the defaults if the information wasn't entered in the widget configuration screen
         if (this.config.cylinderHeight === undefined) {
@@ -346,16 +346,12 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
         });
 
         // Only retrieve the latest historical measurement if we're not in debugMode
-        if (!this.config.debugMode) {
-          if (this.config.device && this.config.device.id) {
+        if (!this.config.debugMode) { 
+          if (this.config.datapoints && this.config.datapoints.length > 0) {
+            const dataPointsObj = this.config.datapoints.find( dp => dp.__active == true);
             // Get the measurement configuration details
-            const measurement = this.config.measurementSeries.split('.');
-            if (measurement.length !== 2) {
-              reject('Measurement Series is invalid');
-            }
-            const measurementFragment = measurement[0];
-            const measurementSeries = measurement[1];
-
+            const measurementFragment = dataPointsObj.fragment;
+            const measurementSeries = dataPointsObj.series;
             // Get the events ordered by creation date DESC
             const endOfToday = new Date();
             endOfToday.setHours(23, 59, 59, 0);
@@ -383,16 +379,19 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
                 this.setCurrentValue(measurementValue);
               }
             }
-          } else {
+          } 
+          else {
             console.log('Unable to subscribe to realtime measurements as no device has been selected');
           }
-        } else {
+        } 
+        else {
           // for debug mode purposes, set the initial measurement to 25%
           this.setCurrentFillPercentage(25);
         }
         resolve();
-      } else {
-        reject('Measurement series has not been defined in the widget configuration');
+      } 
+      else {
+        reject('Datapoint has not been defined in the widget configuration');
       }
     });
 

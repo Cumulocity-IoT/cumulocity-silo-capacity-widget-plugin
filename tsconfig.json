@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "target": "es6",
     "module": "es2020",
+    "skipLibCheck": true,
     "lib": ["dom", "es2015", "es2016"]
   },
   "angularCompilerOptions": {

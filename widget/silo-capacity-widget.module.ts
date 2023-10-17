@@ -15,7 +15,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
-import { CoreModule, HOOK_COMPONENTS } from "@c8y/ngx-components";
+import { CoreModule, DynamicDatapointsResolver, HOOK_COMPONENTS } from "@c8y/ngx-components";
 import { NgModule } from "@angular/core";
 import { ColorPickerComponent } from "./color-picker/color-picker-component";
 import { ColorPaletteComponent } from "./color-picker/color-palette/color-palette-component";
@@ -24,11 +24,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { SiloCapacityWidget } from "./silo-capacity-widget.component";
 import { SiloCapacityWidgetConfig } from "./silo-capacity-widget-config.component";
 import * as preview from './preview-image';
+import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector';
 
 @NgModule({
     imports: [
         CoreModule,
-        HttpClientModule
+        HttpClientModule,
+        DatapointSelectorModule
     ],
     declarations: [SiloCapacityWidget, SiloCapacityWidgetConfig, ColorPickerComponent, ColorSliderComponent, ColorPaletteComponent],
     entryComponents: [SiloCapacityWidget, SiloCapacityWidgetConfig],
@@ -44,6 +46,9 @@ import * as preview from './preview-image';
                 component: SiloCapacityWidget,
                 configComponent: SiloCapacityWidgetConfig,
                 previewImage: preview.previewImage,
+                resolve: {
+                    datapoints: DynamicDatapointsResolver,
+                  },
                 data: {
                     ng1: {
                         options: {

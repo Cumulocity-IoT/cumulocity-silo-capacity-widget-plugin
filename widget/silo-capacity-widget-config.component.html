@@ -8,18 +8,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <c8y-form-group>
-                        <label for="measurementSeries">
-                            Measurement
-                        </label>
-                        <select class="form-control" id="measurementSeries" name="measurementSeries"
-                            [(ngModel)]="config.measurementSeries" (click)="loadFragmentSeries()">
-                            <option [ngValue]="seriesValue" *ngFor="let seriesValue of supportedSeries"
-                                [selected]="seriesValue == config.measurementSeries">{{seriesValue}}</option>
-                            required
-                        </select>
-                    </c8y-form-group>
+                <div class="form-group col-sm-12 " *ngIf="configDevice">
+                    <form [formGroup]="formGroup" >
+                    <c8y-datapoint-selection-list
+                        [minActiveCount]="1"
+                        [maxActiveCount]="1"
+                        [defaultFormOptions]="datapointSelectDefaultFormOptions"
+                        [config]="datapointSelectionConfig"
+                        formControlName="datapoints"
+                        name="datapoints"
+                    ></c8y-datapoint-selection-list>
+                    </form>
                 </div>
             </div>
             <div class="row">
