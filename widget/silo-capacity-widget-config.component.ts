@@ -29,18 +29,17 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractControl, FormBuilder, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
-  export function exactlyASingleDatapointActive(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const datapoints: any[] = control.value;
-      if (!datapoints || !datapoints.length) {
-        return null;
-      }
-      const activeDatapoints = datapoints.filter(datapoint => datapoint.__active);
-      if (activeDatapoints.length === 1) {
-        return null;
-      }
-      return { exactlyOneDatapointNeedsToBeActive: true };
+  export function singleDatapointValidation(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => { 
+      const datapoints: any[] = control.value; 
+      if (!datapoints || !datapoints.length) {  return null;  }  
+      const activeDatapointsList = datapoints.filter(datapoint => datapoint.__active);  
+      if (activeDatapointsList.length === 1) { 
+        return null;  
+      } 
+      return { singleDataPointActive: true }; 
     };
+  
   }
 
 @Component({
@@ -48,7 +47,7 @@ import { AbstractControl, FormBuilder, NgForm, ValidationErrors, ValidatorFn, Va
     templateUrl: './silo-capacity-widget-config.component.html',
     styleUrls: ['./silo-capacity-widget-config.component.css']
 })
-export class SiloCapacityWidgetConfig implements OnInit,DoCheck {
+export class SiloCapacityWidgetConfig implements OnInit{
 
     @Input() config: WidgetConfig;
     datapointSelectDefaultFormOptions: Partial<DatapointAttributesFormConfig> = {
@@ -76,46 +75,14 @@ export class SiloCapacityWidgetConfig implements OnInit,DoCheck {
     constructor(private fetchClient: FetchClient, private formBuilder: FormBuilder, private form: NgForm) { }
 
     ngOnInit() {
-        if (this.config.device && this.config.device.id) {
-            this.configDevice = this.config.device.id;
-            this.datapointSelectionConfig.contextAsset = this.config.device;
-            this.datapointSelectionConfig.assetSelectorConfig;
-          }
-        // Populate the dropdown data if a device id has been previously selected
-        if (this.config && this.config.device && this.config.device.id) {
-            this.loadFragmentSeries();
-        }
+
         this.initForm();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
         this.config.datapoints = [ ...value.datapoints ];
       });
     }
 
-    ngDoCheck(): void {
-        if (this.config.device && this.config.device.id !== this.configDevice) {
-          this.configDevice = this.config.device.id;
-          const context = this.config.device;
-          if (context?.id) {
-            this.datapointSelectionConfig.contextAsset = context;
-            this.datapointSelectionConfig.assetSelectorConfig
-          }
-        }
-      }
 
-    public async loadFragmentSeries(): Promise<void> {
-        if (!_.has(this.config, "device.id")) {
-            console.log("Cannot get Measurement fragment and series because the device id is blank.");
-        } else {
-            if (this.oldDeviceId !== this.config.device.id) {
-                this.fetchClient.fetch('/inventory/managedObjects/' + this.config.device.id + '/supportedSeries').then((resp) => {
-                    resp.json().then((jsonResp) => {
-                        this.supportedSeries = jsonResp.c8y_SupportedSeries;
-                    });
-                });
-                this.oldDeviceId = this.config.device.id;
-            }
-        }
-    }
 
     // Cylinder configuration
 
@@ -341,7 +308,7 @@ export class SiloCapacityWidgetConfig implements OnInit,DoCheck {
           datapoints: this.formBuilder.control(new Array<KPIDetails>(), [
             Validators.required,
             Validators.minLength(1),
-            exactlyASingleDatapointActive()
+            singleDatapointValidation()
           ])
         });
       }

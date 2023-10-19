@@ -63,6 +63,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
 
   public measurementContainerStyle = new BehaviorSubject<{ height: string, 'margin-top': string }>({ height: this.measurementContainerHeight + 'px', 'margin-top': this.measurementContainerMarginTop + 'px' });
   public imagesContainerStyle = new BehaviorSubject<{ 'margin-top': string }>({ 'margin-top': this.imagesContainerMarginTop + 'px' });
+  deviceID: any;
 
   // This ViewChild is only used when in debug mode to allow the user to move the foreground and backgrounds image around
   @ViewChild('foregroundImagePlaceHolder', { read: ElementRef, static: false }) set foregroundImage(foregroundImage: ElementRef) {
@@ -146,13 +147,14 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   }
 
   public ngOnInit(): void {
+    this.deviceID= this.config.datapoints.find( dp => dp.__active == true).__target.id;
     // set the initial state
     this.setWidgetInitialState()
       .then(() => {
         // Only subscribe to realtime measurements if we're not in debugMode
         if (!this.config.debugMode) {
           // Subscribe to real-time measurements
-          this.realtimeMeasurement$ = this.realtime.subscribe(`/measurements/${this.config.device.id}`, realtimeData => {
+          this.realtimeMeasurement$ = this.realtime.subscribe(`/measurements/${this.deviceID}`, realtimeData => {
             const dataPointsObj = this.config.datapoints.find( dp => dp.__active == true);
             const measurementFragmentAndSeries=[dataPointsObj.fragment,dataPointsObj.series];
             if (_.has(realtimeData.data.data, `${measurementFragmentAndSeries[0]}.${measurementFragmentAndSeries[1]}`)) {
@@ -358,7 +360,7 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
             const dateTo = endOfToday.toISOString();
 
             const filter = {
-              source: this.config.device.id,
+              source: this.deviceID,
               dateFrom: '1970-01-01',
               dateTo,
               valueFragmentType: measurementFragment,

@@ -1,4 +1,21 @@
-<div class="form-group">
+<div class="col-sm-4">
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <form [formGroup]="formGroup" >
+            <c8y-datapoint-selection-list
+                [minActiveCount]="1"
+                [maxActiveCount]="1"
+                [defaultFormOptions]="datapointSelectDefaultFormOptions"
+                [config]="datapointSelectionConfig"
+                formControlName="datapoints"
+                name="datapoints"
+            ></c8y-datapoint-selection-list>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="form-group col-sm-8">
     <!-- Measurement configuration -->
     <div class="row">
         <div class="configuration-panel">
@@ -8,21 +25,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-sm-12 " *ngIf="configDevice">
-                    <form [formGroup]="formGroup" >
-                    <c8y-datapoint-selection-list
-                        [minActiveCount]="1"
-                        [maxActiveCount]="1"
-                        [defaultFormOptions]="datapointSelectDefaultFormOptions"
-                        [config]="datapointSelectionConfig"
-                        formControlName="datapoints"
-                        name="datapoints"
-                    ></c8y-datapoint-selection-list>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <c8y-form-group>
                         <label for="fillLevelMaximumLabel">Maximum fill level label (optional)</label>
                         <input type="text" class="form-control" id="fillLevelMaximumLabel" name="fillLevelMaximumLabel"
@@ -30,7 +33,7 @@
                             [(ngModel)]="config.fillLevelMaximumLabel">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <c8y-form-group>
                         <label for="fillLevelMaximumAmount">Maximum fill amount</label>
                         <input type="number" class="form-control" id="fillLevelMaximumAmount"
@@ -38,7 +41,7 @@
                             [(ngModel)]="config.fillLevelMaximumAmount" required>
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <c8y-form-group>
                         <label for="fillLevelUnit">Fill level unit</label>
                         <input type="text" class="form-control" id="fillLevelUnit" name="fillLevelUnit"
@@ -48,7 +51,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <c8y-form-group>
                         <label for="fillOrRemainingLabel">Fill or remaining label (optional)</label>
                         <input type="text" class="form-control" id="fillOrRemainingLabel" name="fillOrRemainingLabel"
@@ -56,7 +59,7 @@
                             [(ngModel)]="config.fillOrRemainingLabel">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
                             <label class="label-with-help" for="fillOrRemainingCalculation">Fill or remaining
@@ -86,7 +89,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <c8y-form-group>
                         <label for="currentFillPercentageLabel">Current fill percentage label (optional)</label>
                         <input type="text" class="form-control" id="currentFillPercentageLabel"
@@ -95,7 +98,7 @@
                             [(ngModel)]="config.currentFillPercentageLabel">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
                             <label class="label-with-help" for="percentOrValue">Measurement is a percent or
@@ -233,7 +236,7 @@
                             (change)="onForegroundImageFileUpdated($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-offset-3 col-lg-3">
+                <div class="col-lg-offset-1 col-lg-4">
                     <div class="show-image-container">
                         <input type="checkbox" id="showForegroundImage" name="showForegroundImage"
                             [(ngModel)]="config.showForegroundImage">
@@ -243,7 +246,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="foregroundImageHeightPercent">Height (%)</label>
                         <input type="number" class="form-control" id="foregroundImageHeightPercent"
@@ -251,7 +254,7 @@
                             [ngModel]="config.foregroundImageHeightPercent" (change)="setForegroundImageSize($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="foregroundImageLeftMargin">Left margin (px)</label>
                         <input type="number" class="form-control" id="foregroundImageLeftMargin"
@@ -261,7 +264,7 @@
                             (change)="setForegroundImageLeftMargin($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="foregroundImageTopMargin">Top margin (px)</label>
                         <input type="number" class="form-control" id="foregroundImageTopMargin"
@@ -295,7 +298,7 @@
                             (change)="onBackgroundImageFileUpdated($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-offset-3 col-lg-3">
+                <div class="col-lg-offset-1 col-lg-4">
                     <div class="show-image-container">
                         <input type="checkbox" id="showBackgroundImage" name="showBackgroundImage"
                             [(ngModel)]="config.showBackgroundImage">
@@ -304,7 +307,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="backgroundImageHeightPercent">Height (%)</label>
                         <input type="number" class="form-control" id="backgroundImageHeightPercent"
@@ -312,7 +315,7 @@
                             [ngModel]="config.backgroundImageHeightPercent" (change)="setBackgroundImageSize($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="backgroundImageLeftMargin">Left margin (px)</label>
                         <input type="number" class="form-control" id="backgroundImageLeftMargin"
@@ -322,7 +325,7 @@
                             (change)="setBackgroundImageLeftMargin($event)">
                     </c8y-form-group>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <c8y-form-group>
                         <label for="backgroundImageTopMargin">Top margin (px)</label>
                         <input type="number" class="form-control" id="backgroundImageTopMargin"
@@ -449,7 +452,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="show-debug-container">
                         <input type="checkbox" id="showDebug" name="debugShow" [(ngModel)]="config.debugMode">
                         <label for="showDebug">Enable debug mode</label>
