@@ -15,10 +15,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
-import { Component, Input, OnInit,DoCheck } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WidgetConfig } from './i-widget-config';
 import * as _ from 'lodash'
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FetchClient } from '@c8y/client';
 import {
     DatapointAttributesFormConfig,
@@ -58,7 +57,6 @@ export class SiloCapacityWidgetConfig implements OnInit{
     formGroup: ReturnType<SiloCapacityWidgetConfig['createForm']>;
     configDevice = null;
 
-    private oldDeviceId: string = '';
     private foregroundImageFileAsString: string;
     private backgroundImageFileAsString: string;
 
