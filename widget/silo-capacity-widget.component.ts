@@ -15,11 +15,12 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
-import { AfterViewInit, Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import { WidgetConfig } from './i-widget-config';
 import * as _ from 'lodash'
-import { Realtime, MeasurementService } from '@c8y/ngx-components/api';
+import { Realtime, MeasurementService, InventoryService } from '@c8y/ngx-components/api';
 import { BehaviorSubject } from "rxjs";
+import { ContextDashboardComponent } from '@c8y/ngx-components/context-dashboard';
 
 @Component({
   selector: 'silo-capacity-widget',
@@ -143,11 +144,26 @@ export class SiloCapacityWidget implements OnInit, OnDestroy, AfterViewInit, DoC
   constructor(
     private realtime: Realtime,
     private measurementService: MeasurementService,
-    private elRef: ElementRef) {
+    private elRef: ElementRef,
+    @Optional() private dashboardContextComponent: ContextDashboardComponent,
+    private inventory: InventoryService) {
   }
 
-  public ngOnInit(): void {
-    this.deviceID= this.config.datapoints.find( dp => dp.__active == true).__target.id;
+  public async ngOnInit(): Promise<void> {
+    if (this.dashboardContextComponent?.dashboard?.deviceType && !this.config.device) {
+      const context = this.dashboardContextComponent.context;
+      if (context?.id) {
+        const { id } = context;
+        this.config.device = (await this.inventory.detail(id)).data;
+        this.deviceID= this.config.device.id;
+      }
+      this.config.datapoints.find( dp => dp.__active == true).__target.id=this.deviceID;
+      this.config.datapoints.find( dp => dp.__active == true).__target.name=this.config.device.name;
+    }
+    else{
+      this.deviceID= this.config.datapoints.find( dp => dp.__active == true).__target.id;
+    }
+    
     // set the initial state
     this.setWidgetInitialState()
       .then(() => {
