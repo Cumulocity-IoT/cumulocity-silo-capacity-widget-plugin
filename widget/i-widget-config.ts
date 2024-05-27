@@ -18,7 +18,7 @@
 export interface WidgetConfig {
     device?: {
         id: string;
-        name: string;
+        name?: string;
     };
 
     measurementSeries: string;
