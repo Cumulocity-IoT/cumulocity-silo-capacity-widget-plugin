@@ -12,9 +12,9 @@ Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin creat
 ### Please choose Silo Capacity Widget release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER&nbsp;|&nbsp;CUMULOCITY&nbsp;|&nbsp;SILO CAPACITY WIDGET PLUGIN&nbsp;|
-|--------------------|--------------------------|----------------|
-| 2.0.x              | >=1016.x.x && <=1017.x.x | <=1.1.x        |
-| 2.0.x              | >= 1018.x.x              | 1.2.0          |
+|--------------------|------------------------|--------------|
+| 2.0.x              | >=1018.0.0 <1019.0.0   | 1.2.x        |
+| 2.0.x              | >=1016.0.0 <1018.0.0   | 1.1.x        |
 
 ## Features
 **Configurable cylinder:** Set the height, width, color and location of the cylinder in your widget
