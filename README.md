@@ -1,4 +1,9 @@
-# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.2.0/sag-ps-pkg-silo-capacity-1.2.0.zip)
+# Deprecation notice
+
+This plugin is not further developed and it might break with upcoming Cumulocity releases. Use it at your own risk.
+The repository is archived but feel free to fork & adapt it to your needs in a new repo.
+
+# Cumulocity Silo Capacity Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/Cumulocity-IoT/cumulocity-silo-capacity-widget-plugin/releases/download/1.2.1/sag-ps-pkg-silo-capacity-1.2.1.zip)
 
 Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. It displays a configurable silo capacity graphic with fill levels, foreground image overlay, optional background image and colorized thresholds.
 
@@ -31,7 +36,7 @@ Cumulocity Silo Capacity Widget is the Cumulocity module federation plugin creat
 ## Installation
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-silo-capacity-widget-plugin/releases/download/1.2.0/sag-ps-pkg-silo-capacity-1.2.0.zip) and install via Administrations --> Ecosystems --> Applications --> Packages 
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/Cumulocity-IoT/cumulocity-silo-capacity-widget-plugin/releases/download/1.2.1/sag-ps-pkg-silo-capacity-1.2.1.zip) and install via Administrations --> Ecosystems --> Applications --> Packages 
 
 ## QuickStart
 
@@ -190,6 +195,6 @@ The widget configuration page contains a number of configuration attributes.
 
 ------------------------------
 
-This widget is provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement. While Software AG welcomes contributions, we cannot guarantee to include every contribution in the master project.
+This widget is provided as-is and without warranty or support. They do not constitute part of the Cumulocity product suite. Users are free to use, fork and modify them, subject to the license agreement. While Cumulocity GmbH welcomes contributions, we cannot guarantee to include every contribution in the master project.
 _____________________
-For more information you can Ask a Question in the [TECH Community Forums](https://tech.forums.softwareag.com/tag/Cumulocity-IoT).
+For more information you can Ask a Question in the [TECH Community Forums](https://techcommunity.cumulocity.com).
